@@ -8,6 +8,7 @@ class SpringMongoLoginApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
 
 }
