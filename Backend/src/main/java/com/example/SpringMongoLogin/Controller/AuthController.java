@@ -5,6 +5,8 @@ import com.example.SpringMongoLogin.Model.AuthenticationResponse;
 import com.example.SpringMongoLogin.Model.UserModel;
 import com.example.SpringMongoLogin.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 public class AuthController {
@@ -37,7 +42,23 @@ public class AuthController {
             return ResponseEntity.ok(new AuthenticationResponse(false));
         }
 
-        return ResponseEntity.ok(new AuthenticationResponse(true));
+        //return ResponseEntity.ok(new AuthenticationResponse(true));
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add("Access-Control-Allow-Origin", 
+         "http://localhost:3000");
+
+         responseHeaders.add("Access-Control-Allow-Credentials", 
+         "true");
+
+         responseHeaders.add("Access-Control-Allow-Methods", 
+         "GET, POST, OPTIONS");
+
+         responseHeaders.add("Access-Control-Allow-Headers", 
+         "Origin, Content-Type, Accept");
+
+         ResponseEntity<?> responseEntity = new ResponseEntity(true,responseHeaders,HttpStatus.OK);
+         return responseEntity;
 
 
     }
@@ -55,7 +76,23 @@ public class AuthController {
             return ResponseEntity.ok(new AuthenticationResponse(false));
         }
 
-        return ResponseEntity.ok(new AuthenticationResponse(true));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add("Access-Control-Allow-Origin", 
+         "http://localhost:3000");
 
+         responseHeaders.add("Access-Control-Allow-Credentials", 
+         "true");
+
+         responseHeaders.add("Access-Control-Allow-Methods", 
+         "GET, POST, OPTIONS");
+
+         responseHeaders.add("Access-Control-Allow-Headers", 
+         "Origin, Content-Type, Accept");
+
+         ResponseEntity<?> responseEntity = new ResponseEntity(true,responseHeaders,HttpStatus.OK);
+         return responseEntity;
+
+       // return ResponseEntity.ok(new AuthenticationResponse(true)).header(responseHeaders);
+   
     }
 }
