@@ -34,10 +34,10 @@ public class AuthController {
         try {
             userRepo.save(userModel);
         } catch (Exception e){
-            return ResponseEntity.ok(new AuthenticationResponse("Subscription failed "+username));
+            return ResponseEntity.ok(new AuthenticationResponse(false));
         }
 
-        return ResponseEntity.ok(new AuthenticationResponse("Subscribed successfully "+username));
+        return ResponseEntity.ok(new AuthenticationResponse(true));
 
 
     }
@@ -52,10 +52,10 @@ public class AuthController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
         } catch (Exception e){
             System.out.println(e.getMessage());
-            return ResponseEntity.ok(new AuthenticationResponse("Authentication failed "+username));
+            return ResponseEntity.ok(new AuthenticationResponse(false));
         }
 
-        return ResponseEntity.ok(new AuthenticationResponse("Authentication done successfully "+username));
+        return ResponseEntity.ok(new AuthenticationResponse(true));
 
     }
 }
